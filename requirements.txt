@@ -1,0 +1,10 @@
+g4f
+black
+ruff
+pytest
+bandit
+radon
+fastapi
+uvicorn
+beautifulsoup4
+requests

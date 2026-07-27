@@ -1,0 +1,15 @@
+version: 2
+updates:
+  # Автоматическое обновление Node.js / NPM пакетов
+  - package-ecosystem: 'npm'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+    open-pull-requests-limit: 5
+
+  # Автоматическое обновление Android/Gradle зависимостей
+  - package-ecosystem: 'gradle'
+    directory: '/AIAppManager'
+    schedule:
+      interval: 'weekly'
+    open-pull-requests-limit: 5

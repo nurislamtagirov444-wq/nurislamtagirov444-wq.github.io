@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="AI App Manager"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="16dp" />
+
+    <Button
+        android:id="@+id/btnPermission"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Grant Usage Permission" />
+
+    <Button
+        android:id="@+id/btnAiAnalyze"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="AI Analysis &amp; Management"
+        android:layout_marginTop="8dp" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp">
+        <TextView
+            android:id="@+id/tvStats"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp" />
+    </ScrollView>
+</LinearLayout>

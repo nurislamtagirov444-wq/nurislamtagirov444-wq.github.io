@@ -1,0 +1,6 @@
+node_modules/
+.venv/
+cmdline-tools.zip
+*.zip
+*.tar.gz
+*.apk

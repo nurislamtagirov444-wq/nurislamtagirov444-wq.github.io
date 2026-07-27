@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Загрузка Приложений</title>
+    <style>
+        body { 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%); 
+            color: white; 
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        header {
+            margin-top: 50px;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        p.subtitle {
+            font-size: 1.2rem;
+            color: #d1d8e0;
+            max-width: 600px;
+            text-align: center;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 40px;
+            padding: 20px;
+            max-width: 1000px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            width: 300px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            transition: transform 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+        }
+        .card h2 {
+            margin-top: 0;
+            color: #fff;
+        }
+        .card p {
+            color: #e0e0e0;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+        .download-btn {
+            display: inline-block;
+            background: #ff4081;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s, box-shadow 0.3s;
+        }
+        .download-btn:hover {
+            background: #f50057;
+            box-shadow: 0 4px 15px rgba(255, 64, 129, 0.4);
+        }
+        .play-btn {
+            display: inline-block;
+            background: #00e676;
+            color: white;
+            text-decoration: none;
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: background 0.3s, box-shadow 0.3s;
+            margin-top: 10px;
+        }
+        .play-btn:hover {
+            background: #00c853;
+            box-shadow: 0 4px 15px rgba(0, 230, 118, 0.4);
+        }
+        .badge {
+            display: inline-block;
+            background: #ffc107;
+            color: #000;
+            font-size: 0.75rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .badge.ai {
+            background: #00bcd4;
+        }
+        footer {
+            margin-top: auto;
+            padding: 20px;
+            color: rgba(255,255,255,0.6);
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Мои Приложения</h1>
+        <p class="subtitle">Добро пожаловать в репозиторий проектов. Здесь вы можете скачать Android APK или запустить веб-версии.</p>
+    </header>
+
+    <div class="container">
+        
+        <!-- Карточка AI App Manager -->
+        <div class="card">
+            <span class="badge ai">AI Utility</span>
+            <h2>AI App Manager</h2>
+            <p>Утилита для отслеживания экранного времени. Использует продвинутый алгоритм для анализа того, на что вы тратите время, и дает советы по цифровому благополучию.</p>
+            <a href="https://github.com/nurislamtagirov444-wq/nurislamtagirov444-wq.github.io/actions/workflows/build.yml" class="download-btn">Собрать APK</a>
+        </div>
+
+        <!-- Карточка Аниме Новеллы -->
+        <div class="card">
+            <span class="badge">Visual Novel</span>
+            <h2>Аниме Новелла</h2>
+            <p>Интерактивная визуальная новелла про магическую академию с динамическими фонами и системой выборов, влияющих на концовку истории.</p>
+            <a href="https://github.com/nurislamtagirov444-wq/nurislamtagirov444-wq.github.io/actions/workflows/build_anime.yml" class="download-btn">Собрать APK</a><br>
+            <a href="https://nurislamtagirov444-wq.github.io/novel.html" class="play-btn">Играть в браузере</a>
+        </div>
+
+        <!-- Карточка AI Coder -->
+        <div class="card">
+            <span class="badge ai">Python Tool</span>
+            <h2>AI Coder Tool</h2>
+            <p>Бесплатный консольный ИИ-ассистент программиста на базе GPT-4. Помогает находить ошибки, генерирует код и может проводить ревью ваших Git коммитов.</p>
+            <a href="https://github.com/nurislamtagirov444-wq/nurislamtagirov444-wq.github.io" class="download-btn">Перейти к коду</a>
+        </div>
+
+    </div>
+
+    <footer>
+        &copy; 2026 nurislamtagirov444-wq. Powered by GitHub Pages.
+    </footer>
+
+</body>
+</html>
