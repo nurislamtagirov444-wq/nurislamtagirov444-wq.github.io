@@ -99,15 +99,20 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        sb.append("\n💡 AI Recommendation:\n")
+        sb.append("\n🤖 AI Recommendations:\n")
         if (mostUsed.isNotEmpty()) {
             val maxMin = maxTime / 1000 / 60
             if (maxMin > 60) {
-                sb.append("You spend a lot of time on $mostUsed ($maxMin minutes). Consider setting a daily limit to improve productivity!\n")
+                sb.append("⚠️ You spend a lot of time on $mostUsed ($maxMin minutes). Consider setting a daily limit to improve productivity!\n")
             } else {
-                sb.append("Great job! Your app usage is well balanced.\n")
+                sb.append("✅ Great job! Your app usage is well balanced.\n")
             }
-            sb.append("\nTo manage your digital wellbeing, this AI recommends checking alternative lightweight apps.")
+            if (statsList.size > 3) {
+                sb.append("💡 AI Notice: You use ${statsList.size} different apps frequently. Multitasking can reduce focus.\n")
+            }
+            sb.append("\nTo manage your digital wellbeing, this AI recommends using Focus Mode during work hours.")
+        } else {
+             sb.append("Not enough data for AI to analyze yet.")
         }
         
         tvText.append(sb.toString())
