@@ -1,10 +1,14 @@
 {
   "name": "nurislamtagirov444-wq.github.io",
   "version": "1.0.0",
-  "description": "К сожалению, из-за ограничений разрешений бота GitHub (отсутствует разрешение `workflows`), я не могу напрямую создать автоматическую сборку APK на серверах GitHub.",
+  "description": "\u041a \u0441\u043e\u0436\u0430\u043b\u0435\u043d\u0438\u044e, \u0438\u0437-\u0437\u0430 \u043e\u0433\u0440\u0430\u043d\u0438\u0447\u0435\u043d\u0438\u0439 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043d\u0438\u0439 \u0431\u043e\u0442\u0430 GitHub (\u043e\u0442\u0441\u0443\u0442\u0441\u0442\u0432\u0443\u0435\u0442 \u0440\u0430\u0437\u0440\u0435\u0448\u0435\u043d\u0438\u0435 `workflows`), \u044f \u043d\u0435 \u043c\u043e\u0433\u0443 \u043d\u0430\u043f\u0440\u044f\u043c\u0443\u044e \u0441\u043e\u0437\u0434\u0430\u0442\u044c \u0430\u0432\u0442\u043e\u043c\u0430\u0442\u0438\u0447\u0435\u0441\u043a\u0443\u044e \u0441\u0431\u043e\u0440\u043a\u0443 APK \u043d\u0430 \u0441\u0435\u0440\u0432\u0435\u0440\u0430\u0445 GitHub.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "format": "prettier --write .",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "start:ai": "python ai_coder.py"
   },
   "repository": {
     "type": "git",
