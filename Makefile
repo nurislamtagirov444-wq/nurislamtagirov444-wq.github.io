@@ -23,20 +23,28 @@ run-ai:
 
 audit:
 	@echo "🔍 Поиск уязвимостей в коде (Security Scan)..."
-	source .venv/bin/activate && bandit -r . -x .venv,node_modules -f custom || echo "Bandit не установлен"
+	. .venv/bin/activate && bandit -r . -x .venv,node_modules -f custom || echo "Bandit не установлен"
 
 complexity:
 	@echo "📈 Анализ сложности кода (Макаронный код?)..."
-	source .venv/bin/activate && radon cc . -a -nc || echo "Radon не установлен"
+	. .venv/bin/activate && radon cc . -a -nc || echo "Radon не установлен"
 
 todo:
 	@echo "📝 Сбор всех TODO и FIXME в один отчет..."
-	source .venv/bin/activate && python scripts/extract_todos.py
+	. .venv/bin/activate && python scripts/extract_todos.py
 
 mock-api:
 	@echo "🚀 Запуск фейкового API сервера на порту 8000..."
-	source .venv/bin/activate && uvicorn scripts.mock_api:app --reload
+	. .venv/bin/activate && uvicorn scripts.mock_api:app --reload
 
 changelog:
 	@echo "🕒 Генерация CHANGELOG из истории коммитов..."
-	source .venv/bin/activate && python scripts/generate_changelog.py
+	. .venv/bin/activate && python scripts/generate_changelog.py
+
+ai-review:
+	@echo "🤖 Запуск ИИ Code Review..."
+	. .venv/bin/activate && python scripts/ai_code_review.py
+
+ai-translate:
+	@echo "🌍 Запуск ИИ Переводчика интерфейсов..."
+	. .venv/bin/activate && python scripts/ai_translator.py "$(LANG)"

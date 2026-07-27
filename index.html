@@ -25,12 +25,12 @@
 
     <script>
         const story = {
-            1: { name: "Акира", text: "Привет! Ты наконец-то проснулся. Мы опаздываем в магическую академию!", opt1: { text: "Встать и пойти", next: 2 }, opt2: { text: "Спать дальше", next: 3 } },
-            2: { name: "Акира", text: "Отлично, бежим! Сегодня распределение по магическим гильдиям.", opt1: { text: "Бежать за ней", next: 4 } },
-            3: { name: "Система", text: "Вы проспали важный день. Ваша история закончилась, так и не начавшись. (ПЛОХАЯ КОНЦОВКА)", opt1: { text: "Начать заново", next: 1 } },
-            4: { name: "Акира", text: "Фух, успели. Смотри, это же древний артефакт... он светится рядом с тобой!", opt1: { text: "Прикоснуться к нему", next: 5 }, opt2: { text: "Отойти в сторону", next: 6 } },
-            5: { name: "Система", text: "Артефакт вспыхнул ослепительным светом. Вы обрели невероятную силу! (ХОРОШАЯ КОНЦОВКА)", opt1: { text: "Начать заново", next: 1 } },
-            6: { name: "Акира", text: "Осторожность не повредит. Пойдем лучше на лекцию. (НЕЙТРАЛЬНАЯ КОНЦОВКА)", opt1: { text: "Начать заново", next: 1 } }
+            1: { name: "Акира", bg: "https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80", text: "Привет! Ты наконец-то проснулся. Мы опаздываем в магическую академию!", opt1: { text: "Встать и пойти", next: 2 }, opt2: { text: "Спать дальше", next: 3 } },
+            2: { name: "Акира", bg: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80", text: "Отлично, бежим! Сегодня распределение по магическим гильдиям.", opt1: { text: "Бежать за ней", next: 4 } },
+            3: { name: "Система", bg: "https://images.unsplash.com/photo-1505506874110-6a7a6c9924cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80", text: "Вы проспали важный день. Ваша история закончилась, так и не начавшись. (ПЛОХАЯ КОНЦОВКА)", opt1: { text: "Начать заново", next: 1 } },
+            4: { name: "Акира", bg: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80", text: "Фух, успели. Смотри, это же древний артефакт... он светится рядом с тобой!", opt1: { text: "Прикоснуться к нему", next: 5 }, opt2: { text: "Отойти в сторону", next: 6 } },
+            5: { name: "Система", bg: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80", text: "Артефакт вспыхнул ослепительным светом. Вы обрели невероятную силу! (ХОРОШАЯ КОНЦОВКА)", opt1: { text: "Начать заново", next: 1 } },
+            6: { name: "Акира", bg: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80", text: "Осторожность не повредит. Пойдем лучше на лекцию. (НЕЙТРАЛЬНАЯ КОНЦОВКА)", opt1: { text: "Начать заново", next: 1 } }
         };
 
         let currentScene = 1;
@@ -39,6 +39,7 @@
             const scene = story[currentScene];
             document.getElementById("name").innerText = scene.name;
             document.getElementById("text").innerText = scene.text;
+            document.getElementById("game-container").style.backgroundImage = `url('${scene.bg}')`;
             
             const choicesDiv = document.getElementById("choices");
             choicesDiv.innerHTML = "";
