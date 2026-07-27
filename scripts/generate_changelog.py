@@ -3,7 +3,7 @@ import subprocess
 def generate_changelog():
     try:
         # Получаем последние 10 коммитов
-        result = subprocess.run(['git', 'log', '-10', '--pretty=format:- %s (%h)'], capture_type=subprocess.PIPE, text=True)
+        result = subprocess.run(['git', 'log', '-10', '--pretty=format:- %s (%h)'], capture_output=True, text=True)
         commits = result.stdout
         
         with open("CHANGELOG.md", "w", encoding="utf-8") as f:
