@@ -4,3 +4,6 @@ cmdline-tools.zip
 *.zip
 *.tar.gz
 *.apk
+.build-tools/
+.android-sdk/
+dist/
