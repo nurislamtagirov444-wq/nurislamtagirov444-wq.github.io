@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Аниме Новелла (Браузерная Версия)</title>
+    <style>
+        body { margin: 0; padding: 0; background-color: #2c2c2c; color: white; font-family: sans-serif; display: flex; flex-direction: column; height: 100vh; }
+        #game-container { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; background: url('https://images.unsplash.com/photo-1578632767115-351597cf2477?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80') center/cover; }
+        #dialog-box { background: rgba(0, 0, 0, 0.8); padding: 20px; border-top: 3px solid #ff4081; }
+        #name { color: #ff4081; font-size: 24px; font-weight: bold; margin-bottom: 10px; }
+        #text { font-size: 18px; margin-bottom: 20px; line-height: 1.5; }
+        .btn { display: block; width: 100%; padding: 15px; margin-bottom: 10px; background: #333; color: white; border: 1px solid #ff4081; border-radius: 5px; font-size: 16px; cursor: pointer; text-align: left; transition: 0.2s; }
+        .btn:hover { background: #ff4081; }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="dialog-box">
+            <div id="name">Акира</div>
+            <div id="text">Привет! Ты наконец-то проснулся. Мы опаздываем в магическую академию!</div>
+            <div id="choices"></div>
+        </div>
+    </div>
+
+    <script>
+        const story = {
+            1: { name: "Акира", bg: "https://images.unsplash.com/photo-1513694203232-719a280e022f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80", text: "Привет! Ты наконец-то проснулся. Мы опаздываем в магическую академию!", opt1: { text: "Встать и пойти", next: 2 }, opt2: { text: "Спать дальше", next: 3 } },
+            2: { name: "Акира", bg: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80", text: "Отлично, бежим! Сегодня распределение по магическим гильдиям.", opt1: { text: "Бежать за ней", next: 4 } },
+            3: { name: "Система", bg: "https://images.unsplash.com/photo-1505506874110-6a7a6c9924cb?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80", text: "Вы проспали важный день. Ваша история закончилась, так и не начавшись. (ПЛОХАЯ КОНЦОВКА)", opt1: { text: "Начать заново", next: 1 } },
+            4: { name: "Акира", bg: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80", text: "Фух, успели. Смотри, это же древний артефакт... он светится рядом с тобой!", opt1: { text: "Прикоснуться к нему", next: 5 }, opt2: { text: "Отойти в сторону", next: 6 } },
+            5: { name: "Система", bg: "https://images.unsplash.com/photo-1518709268805-4e9042af9f23?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80", text: "Артефакт вспыхнул ослепительным светом. Вы обрели невероятную силу! (ХОРОШАЯ КОНЦОВКА)", opt1: { text: "Начать заново", next: 1 } },
+            6: { name: "Акира", bg: "https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80", text: "Осторожность не повредит. Пойдем лучше на лекцию. (НЕЙТРАЛЬНАЯ КОНЦОВКА)", opt1: { text: "Начать заново", next: 1 } }
+        };
+
+        let currentScene = 1;
+
+        function renderScene() {
+            const scene = story[currentScene];
+            document.getElementById("name").innerText = scene.name;
+            document.getElementById("text").innerText = scene.text;
+            document.getElementById("game-container").style.backgroundImage = `url('${scene.bg}')`;
+            
+            const choicesDiv = document.getElementById("choices");
+            choicesDiv.innerHTML = "";
+            
+            if (scene.opt1) {
+                let btn = document.createElement("button");
+                btn.className = "btn";
+                btn.innerText = scene.opt1.text;
+                btn.onclick = () => { currentScene = scene.opt1.next; renderScene(); };
+                choicesDiv.appendChild(btn);
+            }
+            if (scene.opt2) {
+                let btn = document.createElement("button");
+                btn.className = "btn";
+                btn.innerText = scene.opt2.text;
+                btn.onclick = () => { currentScene = scene.opt2.next; renderScene(); };
+                choicesDiv.appendChild(btn);
+            }
+        }
+        renderScene();
+    </script>
+</body>
+</html>
