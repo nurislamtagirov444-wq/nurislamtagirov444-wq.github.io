@@ -211,6 +211,7 @@ for p in paths:
         except Exception:
             data = {}
     data.update({
+        "apiKeyHelper": "echo " + key,
         "primaryApiKey": key,
         "apiKey": key,
         "customApiKey": key,
@@ -219,7 +220,14 @@ for p in paths:
         "customBaseUrl": url,
         "model": model,
         "hasCompletedOnboarding": True,
-        "onboardingCompleted": True
+        "onboardingCompleted": True,
+        "env": {
+            "ANTHROPIC_BASE_URL": url,
+            "ANTHROPIC_API_KEY": key,
+            "ANTHROPIC_AUTH_TOKEN": key,
+            "ANTHROPIC_MODEL": model,
+            "CLAUDE_CODE_ATTRIBUTION_HEADER": "0"
+        }
     })
     try:
         os.makedirs(os.path.dirname(p) or ".", exist_ok=True)
