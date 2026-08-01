@@ -103,14 +103,19 @@ try {
     await new Promise((r) => setTimeout(r, 250));
   }
   ok('дошли до первого выбора', (await node()) === 'prologue_06', String(await node()));
-  await clickGame(640, 600); // долистать промпт, чтобы появились кнопки
-  await page.waitForFunction(
-    () => {
+  // кликаем-поллируем, пока кнопки выбора не отрисуются (типинг может быть на любом этапе)
+  let choicesUp = false;
+  for (let i = 0; i < 24 && !choicesUp; i++) {
+    choicesUp = await page.evaluate(() => {
       const st = window.__game?.scene?.scenes?.find((s) => s.scene.key === 'Story');
       return (st?.choiceLayer?.list?.length ?? 0) > 0;
-    },
-    { timeout: 15000 },
-  ); // кнопки выбора отрисованы
+    });
+    if (!choicesUp) {
+      await page.mouse.click(640, 600);
+      await new Promise((r) => setTimeout(r, 220));
+    }
+  }
+  ok('кнопки выбора отрисованы', choicesUp);
   await clickGame(660, 266); // первая опция
   await waitNode('prologue_07a');
   ok('выбор: опция через cond-фильтр работает', true);

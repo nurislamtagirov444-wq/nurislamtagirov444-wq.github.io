@@ -31,6 +31,9 @@ export const PORTRAIT_FILES: Record<string, string> = {
   'marina.calm': 'p_marina_calm.png',
   'marina.smile': 'p_marina_smile.png',
   'marina.sad': 'p_marina_sad.png',
+  'daria.warm': 'p_daria_warm.png',
+  'daria.tense': 'p_daria_tense.png',
+  'ark.calm': 'p_ark_calm.png',
 };
 
 export function portraitFile(who: string, pose: string): string | null {
