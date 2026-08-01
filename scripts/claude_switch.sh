@@ -122,12 +122,12 @@ if [ -z "$NEW_KEY" ]; then
     exit 1
 fi
 
-echo -e "${BLUE} -> [1/3] Полное удаление предыдущих ключей и настроек провайдера...${RESET}"
+echo -e "${BLUE} -> [1/4] Полное удаление предыдущих ключей и настроек провайдера...${RESET}"
 clear_old_keys
 
-echo -e "${BLUE} -> [2/3] Запись нового URL провайдера, ключа и модели...${RESET}"
+echo -e "${BLUE} -> [2/4] Запись нового URL провайдера, ключа и модели...${RESET}"
 
-# Создаем файл окружения с новыми ключами
+# Создаем файл окружения с новыми ключами (включая ANTHROPIC_AUTH_TOKEN для совместимости 2026 года)
 cat << EOF > "$ENV_FILE"
 # ==============================================================================
 # Конфигурация провайдера для Claude Code и ИИ-ассистентов
@@ -137,6 +137,7 @@ cat << EOF > "$ENV_FILE"
 # Anthropic / Claude Code настройки
 export ANTHROPIC_BASE_URL="${NEW_URL}"
 export ANTHROPIC_API_KEY="${NEW_KEY}"
+export ANTHROPIC_AUTH_TOKEN="${NEW_KEY}"
 export ANTHROPIC_MODEL="${NEW_MODEL}"
 export ANTHROPIC_API_URL="${NEW_URL}"
 export ANTHROPIC_URL="${NEW_URL}"
@@ -148,6 +149,14 @@ export OPENAI_MODEL="${NEW_MODEL}"
 export OPENAI_API_BASE="${NEW_URL}"
 EOF
 chmod 600 "$ENV_FILE"
+
+# Если установлен Claude Code CLI, также прописываем в глобальный конфиг claude config set -g
+if command -v claude >/dev/null 2>&1; then
+    claude config set -g env.ANTHROPIC_BASE_URL "${NEW_URL}" 2>/dev/null || true
+    claude config set -g env.ANTHROPIC_API_KEY "${NEW_KEY}" 2>/dev/null || true
+    claude config set -g env.ANTHROPIC_AUTH_TOKEN "${NEW_KEY}" 2>/dev/null || true
+    claude config set -g model "${NEW_MODEL}" 2>/dev/null || true
+fi
 
 # Убедимся, что файл автоматически подгружается во всех оболочках (.bashrc, .profile, .zshrc)
 echo -e "${BLUE} -> [3/4] Настройка автоматической загрузки конфигурации в сессии терминала...${RESET}"

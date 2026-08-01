@@ -24,15 +24,15 @@ fi
 
 mkdir -p "$BIN_DIR"
 
-echo "📥 Установка утилиты claude-key в $BIN_DIR..."
+echo "📥 Загрузка свежей версии claude-key в $BIN_DIR..."
 
-SCRIPT_SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/scripts/claude_switch.sh"
-if [ -f "$SCRIPT_SRC" ]; then
-    cp "$SCRIPT_SRC" "$BIN_DIR/claude-key"
-else
-    curl -sSL "https://raw.githubusercontent.com/nurislamtagirov444-wq/nurislamtagirov444-wq.github.io/arena/019fbdb7-nurislamtagirov444-wq-github-i/scripts/claude_switch.sh" -o "$BIN_DIR/claude-key" 2>/dev/null || \
-    curl -sSL "https://raw.githubusercontent.com/nurislamtagirov444-wq/nurislamtagirov444-wq.github.io/main/scripts/claude_switch.sh" -o "$BIN_DIR/claude-key" || true
-fi
+curl -sSL "https://raw.githubusercontent.com/nurislamtagirov444-wq/nurislamtagirov444-wq.github.io/arena/019fbdb7-nurislamtagirov444-wq-github-i/scripts/claude_switch.sh" -o "$BIN_DIR/claude-key" 2>/dev/null || \
+curl -sSL "https://raw.githubusercontent.com/nurislamtagirov444-wq/nurislamtagirov444-wq.github.io/main/scripts/claude_switch.sh" -o "$BIN_DIR/claude-key" || {
+    SCRIPT_SRC="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/scripts/claude_switch.sh"
+    if [ -f "$SCRIPT_SRC" ]; then
+        cp "$SCRIPT_SRC" "$BIN_DIR/claude-key"
+    fi
+}
 
 chmod +x "$BIN_DIR/claude-key"
 
