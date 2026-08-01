@@ -4,3 +4,4 @@ cmdline-tools.zip
 *.zip
 *.tar.gz
 *.apk
+game/dist/

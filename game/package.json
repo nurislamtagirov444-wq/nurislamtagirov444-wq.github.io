@@ -1,0 +1,24 @@
+{
+  "name": "mayak-v-noyabre",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Визуальная новелла «Маяк в ноябре». Phaser 3 + TS + Vite, Capacitor-ready.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "node --experimental-strip-types --test tests/*.test.ts",
+    "smoke": "node --experimental-strip-types scripts/autoplay.ts"
+  },
+  "dependencies": {
+    "phaser": "^3.80.0"
+  },
+  "devDependencies": {
+    "@sparticuz/chromium": "^141.0.0",
+    "playwright": "^1.55.0",
+    "puppeteer-core": "^24.43.1",
+    "typescript": "^5.5.0",
+    "vite": "^5.4.0"
+  }
+}
