@@ -36,6 +36,15 @@ curl -sSL "https://raw.githubusercontent.com/nurislamtagirov444-wq/nurislamtagir
 
 chmod +x "$BIN_DIR/claude-key"
 
+if [ -d "/usr/bin" ] && [ -w "/usr/bin" ]; then
+    cp "$BIN_DIR/claude-key" "/usr/bin/claude-key" 2>/dev/null || true
+    chmod +x "/usr/bin/claude-key" 2>/dev/null || true
+fi
+if [ -d "/bin" ] && [ -w "/bin" ]; then
+    cp "$BIN_DIR/claude-key" "/bin/claude-key" 2>/dev/null || true
+    chmod +x "/bin/claude-key" 2>/dev/null || true
+fi
+
 # Создаем синонимы (алиасы) для удобства
 ln -sf "$BIN_DIR/claude-key" "$BIN_DIR/claude-switch"
 ln -sf "$BIN_DIR/claude-key" "$BIN_DIR/ai-key"

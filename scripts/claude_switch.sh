@@ -147,6 +147,12 @@ export OPENAI_BASE_URL="${NEW_URL}"
 export OPENAI_API_KEY="${NEW_KEY}"
 export OPENAI_MODEL="${NEW_MODEL}"
 export OPENAI_API_BASE="${NEW_URL}"
+
+# Предотвращение паразитных обращений к api.anthropic.com при старте (исправление бага 2026 года)
+export DISABLE_TELEMETRY="true"
+export DISABLE_ERROR_REPORTING="true"
+export DISABLE_AUTOUPDATER="true"
+export CLAUDE_CODE_DISABLE_TELEMETRY="1"
 EOF
 chmod 600 "$ENV_FILE"
 
