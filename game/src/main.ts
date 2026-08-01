@@ -14,6 +14,7 @@ import type { GameFlow } from './core/flow.ts';
 import type { SaveManager } from './core/save.ts';
 import type { ProceduralAudio } from './audio/procedural.ts';
 import type { StoryScene as StorySceneType } from './scenes/StoryScene.ts';
+import { wireAndroidBack } from './core/platform.ts';
 
 const config: Phaser.Types.Core.GameConfig = {
   type: Phaser.AUTO,
@@ -46,6 +47,9 @@ const config: Phaser.Types.Core.GameConfig = {
 };
 
 const game = new Phaser.Game(config);
+
+// APK: hardware «назад» (в web — неактивно; Esc покрывает ту же карту).
+void wireAndroidBack();
 
 // Диагностический интерфейс (используется E2E-смоуком; на геймплей не влияет).
 (globalThis as { __game?: unknown }).__game = game;

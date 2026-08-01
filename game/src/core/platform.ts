@@ -1,25 +1,31 @@
-// Мобильный мост (APK): hardware-кнопка «назад». В web — неактивно (Esc покрывает то же).
-// ВНИМАНИЕ: исполняется только в Capacitor-окружении; в песочнице не проверялось —
-// финальная проверка на устройстве по инструкции Этапа 4.
-import { BACK_MAP, type GameFlow } from './flow.ts';
+// Мобильный мост (APK): hardware-кнопка «назад» через @capacitor/app.
+// Маппинг = BACK_MAP из SPEC §7. В web-окружении listener не регистрируется:
+// там ту же карту покрывает Esc (каждая сцена слушает keydown-ESC).
+// ПРИМЕЧАНИЕ: проверяется только на устройстве/эмуляторе (Этап 4) — в песочнице нет SDK.
+import { App } from '@capacitor/app';
 
-type CapAppPlugin = {
-  addListener(event: 'backButton', cb: () => void): unknown;
-  exitApp(): void;
-};
+/** Активен ли Capacitor-рантайм (APK) — в web false. */
+export function isNative(): boolean {
+  return Boolean((globalThis as { Capacitor?: { isNativePlatform?: () => boolean } }).Capacitor?.isNativePlatform?.());
+}
 
-export function wireAndroidBack(flow: GameFlow, requestExitDialog: () => void): boolean {
-  const cap = (globalThis as { Capacitor?: { Plugins?: { App?: CapAppPlugin } } }).Capacitor;
-  const app = cap?.Plugins?.App;
-  if (!app?.addListener) return false;
-  app.addListener('backButton', () => {
-    const to = BACK_MAP[flow.state];
-    if (to === null) {
-      if (flow.state === 'TITLE') requestExitDialog();
-      return;
-    }
-    // Каркас BACK_MAP совпадает с картой «назад» каждой сцены: сцены сами слушают
-    // аппаратную кнопку через Capacitor событие — здесь только резервный путь.
+/**
+ * Регистрирует hardware «назад»: синтезирует DOM-событие Escape,
+ * которое сцены уже обрабатывают 1:1 по карте BACK_MAP (SPEC §7).
+ * TITLE → диалог выхода (native confirm) → App.exitApp().
+ * ENDING/EPILOGUE переходы проходят тем же путём, что и Esc.
+ */
+export async function wireAndroidBack(): Promise<boolean> {
+  if (!isNative()) return false;
+  await App.addListener('backButton', () => {
+    globalThis.dispatchEvent(new KeyboardEvent('keydown', { key: 'Escape' }));
   });
   return true;
+}
+
+/** Выход из приложения с подтверждением (только APK; вызывается сценой Title при Esc). */
+export async function confirmAndExit(): Promise<void> {
+  if (!isNative()) return;
+  const ok = globalThis.confirm('Выйти из «Маяка в ноябре»?');
+  if (ok) await App.exitApp();
 }

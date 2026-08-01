@@ -12,9 +12,13 @@
     "smoke": "node --experimental-strip-types scripts/autoplay.ts"
   },
   "dependencies": {
+    "@capacitor/app": "^8.1.1",
+    "@capacitor/core": "^8.5.0",
     "phaser": "^3.80.0"
   },
   "devDependencies": {
+    "@capacitor/android": "^8.5.0",
+    "@capacitor/cli": "^8.5.0",
     "@sparticuz/chromium": "^141.0.0",
     "playwright": "^1.55.0",
     "puppeteer-core": "^24.43.1",

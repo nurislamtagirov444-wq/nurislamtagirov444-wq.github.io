@@ -33,17 +33,26 @@ npx vite preview --port 4499 &
 E2E_URL=http://localhost:4499/ node scripts/e2e.mjs --shots
 ```
 
-## Сборка APK (на вашей машине, Android Studio)
+## Сборка APK (на вашей машине)
 
-1. `npm run build` (веб-бандл в `game/dist`).
-2. `cd game && npm i @capacitor/core @capacitor/cli @capacitor/app @capacitor/android`
-3. `npx cap init --web-dir dist` (конфиг уже лежит в `capacitor.config.ts`).
-4. `npx cap add android && npx cap sync`
-5. `npx cap open android` → в Android Studio: Run ▶ или Build APK.
-   minSdk 23, targetSdk 35. Ориентация landscape: добавьте
-   `android:screenOrientation="sensorLandscape"` в `android/app/src/main/AndroidManifest.xml`.
-6. Hardware-кнопка «назад»: подключите `src/core/platform.ts` (`wireAndroidBack`)
-   в `src/main.ts` после создания `game` — в вебе вместо неё работает Esc.
+Быстрый путь (Ubuntu/Debian) — один скрипт ставит JDK 21, Android SDK
+(cmdline-tools, platform-tools, `platforms;android-35`, `build-tools;35.0.0`),
+синхронизирует Capacitor и собирает debug-APK:
+
+```bash
+cd game && bash scripts/setup-android-toolchain.sh
+```
+
+Ручной путь (любая ОС):
+1. JDK 21 (Temurin): https://adoptium.net/temurin/releases/?version=21
+2. Android Studio либо cmdline-tools: platform-tools, `platforms;android-35`, `build-tools;35.0.0`.
+3. В `game/`: `npm ci && npm run build && npx cap sync android`
+4. `npx cap open android` → Run ▶ / Build APK; либо CLI: `cd android && ./gradlew assembleDebug`
+
+Проект: Capacitor 8.5.0, `android/` уже сгенерирован и закоммичен, плагин
+`@capacitor/app` (hardware «назад») подключён, ориентация залочена в landscape
+(`sensorLandscape` в AndroidManifest), minSdk/targetSdk — из `android/variables.gradle` (Capacitor 8: minSdk 23+, targetSdk 35).
+Release-APK: `./gradlew assembleRelease` (подпись — своя keystore, Android Studio предложит).
 
 ## Состав (P0)
 

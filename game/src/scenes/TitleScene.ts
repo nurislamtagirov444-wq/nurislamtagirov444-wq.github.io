@@ -116,7 +116,8 @@ export class TitleScene extends Phaser.Scene {
     audio.ambience('rain');
 
     this.input.keyboard?.on('keydown-ESC', () => {
-      // На титуле системная «назад» не делает ничего в web (SPEC §7).
+      // web: ничего (SPEC §7). APK (hardware back → тот же Esc): диалог выхода.
+      import('../core/platform.ts').then((m) => void m.confirmAndExit());
     });
   }
   private spawnRain(): void {
