@@ -35,23 +35,31 @@ E2E_URL=http://localhost:4499/ node scripts/e2e.mjs --shots
 
 ## Сборка APK (на вашей машине)
 
-Быстрый путь (Ubuntu/Debian) — один скрипт ставит JDK 21, Android SDK
-(cmdline-tools, platform-tools, `platforms;android-35`, `build-tools;35.0.0`),
-синхронизирует Capacitor и собирает debug-APK:
+Быстрый путь (Ubuntu 22.04 / Debian, в т.ч. облачная ВМ; работает и под root) —
+один скрипт ставит Node.js 22, JDK 21, Android SDK (cmdline-tools, platform-tools,
+`platforms;android-36`, `build-tools;36.x`) и собирает debug-APK:
 
 ```bash
-cd game && bash scripts/setup-android-toolchain.sh
+git clone -b arena/019fbeee-nurislamtagirov444-wq-github-i \
+  https://github.com/nurislamtagirov444-wq/nurislamtagirov444-wq.github.io.git
+cd nurislamtagirov444-wq.github.io/game && bash scripts/setup-android-toolchain.sh
 ```
 
+Скрипт идемпотентен (повторный запуск пропускает готовые шаги) и в конце печатает
+путь к APK, размер, SHA-256 и готовую команду `scp` для копирования на телефон.
+Требования: x86_64, ~8 ГБ свободного места, доступ в интернет (dl.google.com,
+services.gradle.org, deb.nodesource.com, packages.adoptium.net).
+
 Ручной путь (любая ОС):
-1. JDK 21 (Temurin): https://adoptium.net/temurin/releases/?version=21
-2. Android Studio либо cmdline-tools: platform-tools, `platforms;android-35`, `build-tools;35.0.0`.
+1. Node.js 22 + JDK 21 (Temurin): https://adoptium.net/temurin/releases/?version=21
+2. Android Studio либо cmdline-tools: platform-tools, `platforms;android-36`, `build-tools;36.0.0`.
 3. В `game/`: `npm ci && npm run build && npx cap sync android`
 4. `npx cap open android` → Run ▶ / Build APK; либо CLI: `cd android && ./gradlew assembleDebug`
 
 Проект: Capacitor 8.5.0, `android/` уже сгенерирован и закоммичен, плагин
 `@capacitor/app` (hardware «назад») подключён, ориентация залочена в landscape
-(`sensorLandscape` в AndroidManifest), minSdk/targetSdk — из `android/variables.gradle` (Capacitor 8: minSdk 23+, targetSdk 35).
+(`sensorLandscape` в AndroidManifest), SDK — из `android/variables.gradle`
+(minSdk 24, compile/targetSdk 36).
 Release-APK: `./gradlew assembleRelease` (подпись — своя keystore, Android Studio предложит).
 
 ## Состав (P0)
@@ -63,7 +71,7 @@ Release-APK: `./gradlew assembleRelease` (подпись — своя keystore, 
   пауза, эффекты низкой Ясности, экран концовки и эпилога.
 - Аудио: процедурный WebAudio-синтез эмбиента (дождь/море/ветер/радио/комната) и
   UI-звуков. В игре нет ни одного аудиофайла.
-- Арт: 7 фонов + 3 портрета (сгенерированы, оригинальные). Концовки — композиции с
-  цветокором (отдельные CG и портреты Дарьи/Штерна — срез P1, лимит генерации 10/сессия).
+- Арт: 7 фонов + 6 портретов (аниме-стилистика классических японских VN, оригинальные). Концовки — композиции с
+  цветокором (отдельные CG и портреты Штерна — срез P1, лимит генерации 10/сессия).
 
 Структура кода и конечный автомат экранов — см. `../SPEC.md` (единый источник правды).
